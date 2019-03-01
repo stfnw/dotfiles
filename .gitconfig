@@ -1,0 +1,76 @@
+[alias]
+    # git and bash (g for git) aliases - with bash completion for subcommand arguments
+    # parts are taken from e.g.
+    # https://gist.github.com/mwhite/6887990 for good integration
+    # http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
+    ############################################################################
+    i   = init
+    a   = add
+    au  = add --update
+    s   = status --short
+    c   = commit
+    ca  = commit --amend
+    cm  = commit -m
+    p   = pull
+    f   = fetch
+    cl  = clone
+    k   = !"gitk --all &"
+    co  = checkout
+    d   = diff --color
+    dc  = diff --cached --color
+    dt  = difftool
+    dtc = difftool --cached
+    lp  = log --patch
+    b   = branch
+    r   = remote
+    ls  = ls-tree -r --name-only
+    # updates all repositories in the current folder
+    u   = !"find . -mindepth 1 -maxdepth 1 -type d -exec git --git-dir='{}/.git' --work-tree='{}/' pull --all \\;"
+
+    # search in commit messages
+    fcm = log --all -i --grep
+    # search in history -- all files
+    ff  = "!fh() { git grep \"$1\" $(git rev-list --all); }; fh"
+    # search in history -- show commits whose patch text matches regex
+    fc  = log -p -i -G
+
+
+    # nice graph overview
+    internal-lgg    = !"git log --graph --all --format=format:'%D' | uniq"
+    lgg             = !"git internal-lgg | less --no-init --quit-if-one-screen"
+    # split graph overview along multiple columns
+    lggc            = !"width=$(stty size | cut -d' ' -f2) ; git internal-lgg | column -c $width | less --no-init --quit-if-one-screen"
+
+
+    # from http://stackoverflow.com/questions/1838873/visualizing-branch-topology-in-git/34467298#34467298
+    lg  = !"git lg1"
+    lg1 = !"git lg1-specific --all"
+    lg2 = !"git lg2-specific --all"
+    lg3 = !"git lg3-specific --all"
+
+    # with statistics / summary
+    lgs = !"git lg1 --stat"
+    # or: lgs = !"git lg1 --summary"
+
+    lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+    lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+    lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+
+    # also nice: git log --all --graph --abbrev-commit --decorate --pretty=oneline
+
+
+    # automatically fetch .gitignore from https://github.com/joeblau/gitignore.io
+    ig  = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+
+
+[diff]
+    wsErrorHighlight = all      # highlight e.g. trailing whitespace in diff
+    tool = vimdiff
+
+
+[core]
+    excludesfile = ~/.gitignore
+
+
+[color]
+    ui = true

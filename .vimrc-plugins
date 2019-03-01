@@ -1,0 +1,44 @@
+" -------- Plugin Management with vim-plug -------------------------------------
+" ------------------------------------------------------------------------------
+
+" [Automatic installation](https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | qall
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'vim-scripts/jcl.vim', { 'do' : 'dos2unix ./plugin/jcl.vim' }
+Plug 'dhruvasagar/vim-table-mode'                   " for pretty ascii tables
+Plug 'tpope/vim-fugitive'                           " for all things git
+Plug 'neomake/neomake'                              " e.g. for shellcheck / other linters
+Plug 'lervag/vimtex'                                " for latex editing
+Plug 'NLKNguyen/papercolor-theme'                   " nice color scheme
+call plug#end()
+
+colorscheme PaperColorPatched
+
+
+" -------- Plugin Configurations -----------------------------------------------
+" ------------------------------------------------------------------------------
+
+    " -------- configure vim-table-mode ----------------------------------------
+    " --------------------------------------------------------------------------
+let g:table_mode_corner='|'
+let g:table_mode_header_fillchar="-"
+
+
+    " -------- configure vimtex with okular ------------------------------------
+    " --------------------------------------------------------------------------
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+let g:vimtex_view_general_options_latexmk = '--unique'
+let g:vimtex_toc_tocdepth = 4                       " set higher toc depth
+
+
+    " -------- configure neomake -----------------------------------------------
+    " --------------------------------------------------------------------------
+silent! call neomake#configure#automake('nrwi', 500)
+
+let g:neomake_tex_enabled_makers = []               " disable neomake for latex

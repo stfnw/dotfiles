@@ -1,0 +1,36 @@
+#!/bin/bash
+set -euf -o pipefail
+
+cd "$(dirname "${BASH_SOURCE}")"
+
+DSTDIR=~/
+
+
+################################################################################
+# link/copy normal configuration files #########################################
+################################################################################
+
+# link only files and re-create directories:
+install_file() {
+    FILE="$1"                       # relative path to the source file
+    DIR="$(dirname "$FILE")"        # relative path to source dir
+    if [[ ! -d "${DSTDIR}${DIR}" ]] ; then
+        mkdir --verbose --parents "${DSTDIR}${DIR}"
+    fi
+
+    ln --verbose --symbolic --relative --no-dereference --interactive "$FILE" "${DSTDIR}${DIR}/" </dev/tty
+    # cp --verbose --remove-destination --interactive "$FILE" --target-directory="${DSTDIR}${DIR}/" </dev/tty
+}
+
+find -mindepth 1 -type f ! -path './.git/*' ! -name install ! -name README.md ! -name LICENSE -print0 |
+    while IFS= read -r -d $'\0' file; do
+        install_file "$file"
+    done
+
+
+################################################################################
+# post-processing ##############################################################
+################################################################################
+
+    # vim configuration ########################################################
+vim -cq                    # autoinstallation of plugins is configured in .vimrc
