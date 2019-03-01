@@ -1,0 +1,3 @@
+Install with:
+
+    ./install
