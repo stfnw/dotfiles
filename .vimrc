@@ -93,7 +93,7 @@ augroup filetype_specific
     autocmd FileType markdown setlocal tabstop=2 softtabstop=2 shiftwidth=2 wrap textwidth=80 formatoptions+=t
     autocmd FileType c setlocal equalprg=indent\ -linux\ --no-tabs\ --indent-level4         " format c code
     autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null     " format xml
-    autocmd FileType markdown,tex let b:keepTwoTrailingWhitespaces=1                        " here, trailing spaces carry meaning (line break)
+    autocmd FileType markdown,tex let b:keepTwoTrailingWhitespaces=1 | setlocal list        " here, trailing spaces carry meaning (line break)
 augroup end
 
 augroup trailing_whitespace
