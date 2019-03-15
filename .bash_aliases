@@ -7,8 +7,9 @@
 alias rm=trash                                          # safeguard from deleting files
 
 alias grep='grep --color'                               # colored output
-alias egrep='egrep --color=auto'
-alias ls='ls --color=auto'
+alias egrep='egrep --color'
+alias ls='ls --color'
+alias diff='diff --color'
 
 alias python='python3'                                  # default to python3
 
