@@ -1,0 +1,10 @@
+snippet latex "Latexmkrc config template"
+$pdf_mode = 1;
+
+# $preview_continuous_mode = 1;
+
+# $pdflatex = 'xelatex --shell-escape -interaction=nonstopmode -synctex=1 %O %S';
+$pdflatex = 'pdflatex --shell-escape -interaction=nonstopmode -synctex=1 %O %S';
+
+$use_make_for_missing_files = 1;
+endsnippet
