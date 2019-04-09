@@ -1,0 +1,2 @@
+! remap menu key to super key to give symmetric modifier key for i3
+keycode 135 = Super_R
