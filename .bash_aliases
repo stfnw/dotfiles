@@ -100,3 +100,12 @@ _startsession() {
   _edit_commit "$file" -c 'normal Gzzo- ' -c 'startinsert!'
   sed -i "s/${id}/$(date --iso=s)/g" "$file"
 }
+
+
+# start an application without internet access
+# requires preconfiguration like described in https://ubuntuforums.org/showthread.php?t=1188099&s=73e8a8809da60f5e49641129388c7658
+# sudo groupadd nointernet
+# sudo usermod -aG nointernet $(whoami)
+# sudo iptables -A OUTPUT -m owner --gid-owner nointernet -j DROP
+# sudo ip6tables -A OUTPUT -m owner --gid-owner nointernet -j DROP
+alias ni='sg nointernet'
