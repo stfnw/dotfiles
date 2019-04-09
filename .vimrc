@@ -23,6 +23,7 @@ let &showbreak = '>>> '
 let is_bash         = 1                             " prefer bash shell syntax
 let asmsyntax       = 'nasm'                        " prefer nasm assembly syntax
 let c_syntax_for_h  = 1                             " use c (and not c++) syntax for header files
+let tex_flavor      = 'latex'                       " use latex for tex files
 let tex_fold_enabled=1
 
 set guioptions-=T                                   " remove toolbar
