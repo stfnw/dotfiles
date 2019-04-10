@@ -1,0 +1,5 @@
+#!/bin/bash
+TMPIMG=/tmp/screenshot.png
+import -window root $TMPIMG
+convert $TMPIMG -blur 0x8 $TMPIMG
+/usr/bin/i3lock -i $TMPIMG
