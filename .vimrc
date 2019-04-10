@@ -122,3 +122,6 @@ function! Preserve(command)
   let @/=_s
   call cursor(l, c)
 endfunction
+
+" fix rust filetype detection
+autocmd BufNewFile,BufRead *.rs set filetype=rust
