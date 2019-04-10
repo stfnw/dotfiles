@@ -1,2 +1,3 @@
 #!/bin/bash
 [[ -f ~/.Xmodmap ]] && /usr/bin/xmodmap ~/.Xmodmap
+sh ~/.fehbg &
