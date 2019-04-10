@@ -154,3 +154,8 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+# take screenshots
+set $SCREENSHOT_FILE ~/Bilder/screenshots/"$(date +%Y-%m-%d_%H-%M-%S).png"
+bindsym --release $mod+x exec --no-startup-id import -window root $SCREENSHOT_FILE
+bindsym --release $mod+Shift+x exec --no-startup-id import $SCREENSHOT_FILE
