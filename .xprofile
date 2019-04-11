@@ -1,5 +1,6 @@
 #!/bin/bash
 [[ -f ~/.Xmodmap ]] && /usr/bin/xmodmap ~/.Xmodmap
 sh ~/.fehbg &
+pkttyagent &
 
 exec i3
