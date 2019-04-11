@@ -144,7 +144,6 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -153,26 +152,27 @@ bar {
         status_command i3status
 }
 
+
 # take screenshots
 set $SCREENSHOT_FILE ~/Bilder/screenshots/"$(date +%Y-%m-%d_%H-%M-%S).png"
 bindsym --release $mod+x exec --no-startup-id import -window root $SCREENSHOT_FILE
 bindsym --release $mod+Shift+x exec --no-startup-id import $SCREENSHOT_FILE
+
 
 # Shutdown, reboot, lock screen https://wiki.archlinux.org/index.php/i3#Shutdown.2C_reboot.2C_lock_screen
 set $Locker ~/.local/bin/i3lock
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (p) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"
+        bindsym l exec --no-startup-id $Locker, mode "default"
+        bindsym e exec --no-startup-id i3-msg exit, mode "default"
+        bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+        bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+        bindsym r exec --no-startup-id systemctl reboot, mode "default"
+        bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"
 
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
 }
-
 bindsym $mod+Pause mode "$mode_system"
