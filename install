@@ -22,7 +22,7 @@ install_file() {
     # cp --verbose --remove-destination --interactive "$FILE" --target-directory="${DSTDIR}${DIR}/" </dev/tty
 }
 
-find -mindepth 1 -type f ! -path './.git/*' ! -name install ! -name README.md ! -name LICENSE -print0 |
+find -mindepth 1 \( -type f -o -type l \) ! -path './.git/*' ! -name install ! -name README.md ! -name LICENSE -print0 |
     while IFS= read -r -d $'\0' file; do
         install_file "$file"
     done
