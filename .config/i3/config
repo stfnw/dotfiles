@@ -216,3 +216,10 @@ mode "monitor" {
         bindsym Escape mode "default"
 }
 bindsym $mod+m mode "monitor"
+
+
+################################################################################
+# execs
+
+# set background
+exec --no-startup-id feh --bg-scale ~/.current_wallpaper
