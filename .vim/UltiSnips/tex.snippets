@@ -11,6 +11,11 @@ def math():
 	# 	> to subtract one.
     groupname = vim.eval('synIDattr(synID(line("."), col(".")-1, 0), "name")')
     return groupname.startswith('texMath') and groupname != 'texMathText'
+
+
+def optional_whitespace(t, argpos):
+	word_delimiter = [',', '.', '?', '-', ' ', '(', '{', '[', ]
+	return ' ' if t[argpos] and t[argpos][0] not in word_delimiter else ''
 endglobal
 
 snippet today "Current date" w
@@ -190,6 +195,42 @@ endsnippet
 
 ################################################################################
 
+snippet up "usepacakge"
+\usepackage{$1}
+$0
+endsnippet
+
+snippet f2 "frame typeset second"
+\begin{frame}[typeset second]
+	\only<second>{
+		$1
+	}
+
+	\only<second:0>{
+		\frametitle{$2}
+		$0
+	}
+\end{frame}
+endsnippet
+
+snippet ha "two minipages of half-pagewidth next to each other"
+\begin{minipage}[t]{0.45\textwidth}
+	$1
+\end{minipage}\hfill\begin{minipage}[t]{0.45\textwidth}
+	$0
+\end{minipage}
+endsnippet
+
+
+snippet fig "figure"
+\begin{figure}
+	\centering
+	\includegraphics[width=$1]{images/$2}
+	\caption{$3}
+	\label{fig:$4}
+\end{figure}
+endsnippet
+
 
 snippet title "create very basic title page" 
 \thispagestyle{empty}
@@ -215,17 +256,23 @@ snippet it "itemize"
 \end{itemize}
 endsnippet
 
-
-snippet im "Inline Math" wA
-$$1$`!p
-if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
-    snip.rv = ' '
-else:
-    snip.rv = ''
-`$2
+snippet en "enumerate"
+\begin{enumerate}
+	\item $0
+\end{enumerate}
 endsnippet
 
-snippet dm "Display Math" wA
+snippet de "description"
+\begin{description}
+	\item$0
+\end{description}
+endsnippet
+
+snippet im "Inline Math" w
+$$1$`!p snip.rv = optional_whitespace(t,2)`$2
+endsnippet
+
+snippet dm "Display Math" w
 \[
 	$1
 .\] $0
@@ -273,7 +320,42 @@ snip.rv = match.string[0:i] + "\\frac{" + match.string[i+1:-1] + '}'
 `{$1}$0
 endsnippet
 
+context "math()"
+snippet fa "forall" wA
+\forall \, $1. \; $0
+endsnippet
+context "math()"
+snippet ex "exists" wA
+\exists \, $1. \; $0
+endsnippet
+
+snippet al "aligned" w
+$\begin{aligned}[t]
+	$0
+\end{aligned}$
+endsnippet
+
+context "math()"
+snippet ( "balance round brackets / parentheses" iA
+\left( $1 \right) $0
+endsnippet
+context "math()"
+snippet [ "balance square brackets / brackets" iA
+\left[ $1 \right] $0
+endsnippet
+# doesn't work, don't know why
+# context "math()"
+# snippet { "balance curly brackets / braces" iA
+# \left\\{ $1 \right\\} $0
+# endsnippet
+
+snippet ( "balance round brackets / parentheses" iA
+($1)`!p snip.rv = optional_whitespace(t,2)`$2
+endsnippet
+snippet [ "balance square brackets / brackets" iA
+[$1]`!p snip.rv = optional_whitespace(t,2)`$2
+endsnippet
+snippet { "balance curly brackets / braces" iA
+{$1}`!p snip.rv = optional_whitespace(t,2)`$2
+endsnippet
 ################################################################################
-
-
-
