@@ -19,6 +19,40 @@ clean:
 	rm -f $(TARGET)
 endsnippet
 
+
+snippet latexmk "Use Makefile in conjunction with latexmk for automatic dependency inclusion"
+# used for creating missing dependencies from source files
+
+
+.PHONY: all clean
+
+all:
+	latexmk
+
+clean:
+	latexmk -C
+
+
+# approach: make flow-chart diagrams in Dia and then *automatically* export them for inclusion in latex
+# 		(so that redundant intermediate files don't need to be checked into git)
+# problem: we want to let latex render e.g. math formulae or sub-scripts like `$P_G$`,
+# 		but direct export from dia escapes latex code into e.g. `\$P\_G\$`
+# => workaround: export dia to svg (with dia) and the svg to pdf (drawings) and tex (text/math)
+# 		(with inkscape) and import that in latex
+%.pdf %.pdf_tex: %.svg
+	inkscape $< --without-gui --export-area-drawing --export-pdf $(<:.svg=.pdf) --export-latex
+
+%.svg: %.dia
+	dia $< --export $@
+
+# use in latex document e.g. with
+#	% allows for include of images by relative path to the `images/` sub-directory
+#	\graphicspath{{images/}}
+#	\def\svgwidth{\textwidth}
+#	\input{images/flowchart_mp_pprl.pdf_tex}
+endsnippet
+
+
 snippet print "Print makefile variable"
 # http://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; @echo $*=$($*)
