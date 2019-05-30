@@ -78,7 +78,7 @@ rts() {
 _edit_commit() {
   file="$1"
   shift
-  "$EDITOR" "$file" "$@"
+  vim "$file" "$@"
   git -C "$(dirname "$file")" add "$file"
   git -C "$(dirname "$file")" commit --message 'update'
 }
