@@ -1,4 +1,9 @@
 snippet latex "Latexmkrc config template"
+# make build reproducible
+$ENV{'SOURCE_DATE_EPOCH'}='`date +%s`';
+# $ENV{'FORCE_SOURCE_DATE'}='1';		# also replace values of e.g. \today
+
+
 $pdf_mode = 1;
 
 # $preview_continuous_mode = 1;
