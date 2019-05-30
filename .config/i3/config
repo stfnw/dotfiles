@@ -204,7 +204,8 @@ bindsym $mod+Pause mode "$mode_system"
 
 set $reload_background exec --no-startup-id sh ~/.fehbg
 # change monitor
-mode "monitor" {
+set $mode_monitor (s) single, (d) dual
+mode "$mode_monitor" {
         # single monitor setup
         bindsym s exec --no-startup-id xrandr --output HDMI-2 --off, $reload_background, mode "default"
 
@@ -215,7 +216,7 @@ mode "monitor" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+m mode "monitor"
+bindsym $mod+m mode "$mode_monitor"
 
 
 ################################################################################
