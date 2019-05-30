@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SELECTION="$1"
+
+SCREENSHOT_FILE="$HOME/Bilder/screenshots/$(date +%Y-%m-%d_%H-%M-%S).png"
+
+case "$SELECTION" in
+    whole)
+        import -window root "$SCREENSHOT_FILE"
+        ;;
+    part)
+        import "$SCREENSHOT_FILE" && xclip -i -t image/png -sel clipboard "$SCREENSHOT_FILE"
+        ;;
+    *)
+        echo 'Error, please specify either "whole" or "part"' >&2
+esac

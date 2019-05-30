@@ -1,0 +1,10 @@
+#!/bin/bash
+# https://www.reddit.com/r/vim/comments/895l5r/integrate_vim_with_inkscape/
+# use vim as editor for arbitrary input
+
+file=$(mktemp)
+
+konsole -e vim "$file"
+head -c -1 "$file" | xdotool type --clearmodifiers --delay 0 --file -
+
+rm -- "$file"

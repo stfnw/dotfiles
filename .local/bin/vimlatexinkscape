@@ -1,0 +1,33 @@
+#!/bin/bash
+################################################################################
+# script to automatically open vim to edit a latex document, compile it,       #
+# convert the resulting pdf to svg and copy it into the clipboard              #
+#                                                                              #
+# can be used e.g. in combination with inkscape to insert latex formulas       #
+# (bind this script to a keyboard shortcut)                                    #
+################################################################################
+
+tex=$(mktemp --suffix=.tex)
+pdf="${tex%.tex}.pdf"
+svg="${tex%.tex}.svg"
+
+cd "$(dirname "$tex")" || exit
+
+cat <<'EOF' >> "$tex"
+\documentclass[varwidth]{standalone}
+
+\usepackage{tikz-qtree}
+
+\usepackage{amsmath}
+\usepackage{stmaryrd}
+
+\begin{document}
+\end{document}
+EOF
+konsole -e vim +'/begin{document}' +'normal o' +startinsert "$tex"
+latexmk -pdf -pdflatex='pdflatex -interaction=nonstopmode -synctex=1 %O %S' "$tex"
+pdf2svg "$pdf" "$svg"
+
+xclip -sel clip -t image/svg+xml -i "$svg"
+
+rm -- ${tex%.tex}.*
