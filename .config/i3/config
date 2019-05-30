@@ -31,6 +31,9 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Mod1+Return exec konsole -e '/bin/sh'
+# start the file manager
+bindsym $mod+Shift+Return exec dolphin
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -178,28 +181,28 @@ bar {
 
 
 # take screenshots
-set $SCREENSHOT_FILE ~/Bilder/screenshots/"$(date +%Y-%m-%d_%H-%M-%S).png"
-bindsym --release $mod+x exec --no-startup-id import -window root $SCREENSHOT_FILE
-bindsym --release $mod+Shift+x exec --no-startup-id import $SCREENSHOT_FILE
+bindsym --release $mod+x exec --no-startup-id ~/.local/bin/screenshot whole
+bindsym --release $mod+Shift+x exec --no-startup-id ~/.local/bin/screenshot part
 
 
 # Shutdown, reboot, lock screen https://wiki.archlinux.org/index.php/i3#Shutdown.2C_reboot.2C_lock_screen
 set $Locker ~/.local/bin/i3lock
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (p) shutdown
+set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (p) shutdown, (u) switch user
 mode "$mode_system" {
         bindsym l exec --no-startup-id $Locker, mode "default"
         bindsym e exec --no-startup-id i3-msg exit, mode "default"
         bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-        bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
         bindsym r exec --no-startup-id systemctl reboot, mode "default"
         bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"
+        bindsym u exec --no-startup-id qdbus --system org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter, mode "default"
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 bindsym $mod+Pause mode "$mode_system"
+bindsym XF86Sleep exec --no-startup-id $Locker && systemctl suspend
 
 
 set $reload_background exec --no-startup-id sh ~/.fehbg
@@ -217,6 +220,18 @@ mode "$mode_monitor" {
         bindsym Escape mode "default"
 }
 bindsym $mod+m mode "$mode_monitor"
+
+
+# enable multimedia/audio keys
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 3%-
+bindsym XF86AudioMute exec --no-startup-id amixer -q sset Master toggle
+
+
+# vim as editor for arbitrary text input
+bindsym $mod+i exec --no-startup-id ~/.local/bin/viminput
+# vim/latex/inkscape integration: paste latex math (moderately) fast into inkscape
+bindsym $mod+n exec --no-startup-id ~/.local/bin/vimlatexinkscape
 
 
 ################################################################################
