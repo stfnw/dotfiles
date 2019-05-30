@@ -10,4 +10,3 @@ inoremap <buffer> "A Ä
 inoremap <buffer> "O Ö
 inoremap <buffer> "U Ü
 inoremap <buffer> "s ß
-

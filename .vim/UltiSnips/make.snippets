@@ -1,0 +1,25 @@
+snippet c "Basic c makefile"
+CFLAGS = -g -Wall -Werror -std=c99
+
+.PHONY: all clean
+.SUFFIXES: # disable built-in rules
+
+SRC    := $(wildcard *.c)
+TARGET := $(basename $(SRC))
+
+all: $(TARGET)
+
+%: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+%: %.o
+	$(CC) -o $@ $<
+
+clean:
+	rm -f $(TARGET)
+endsnippet
+
+snippet print "Print makefile variable"
+# http://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
+print-%: ; @echo $*=$($*)
+endsnippet

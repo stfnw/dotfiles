@@ -15,6 +15,7 @@ Plug 'tpope/vim-fugitive'                           " for all things git
 Plug 'neomake/neomake'                              " e.g. for shellcheck / other linters
 Plug 'lervag/vimtex'                                " for latex editing
 Plug 'NLKNguyen/papercolor-theme'                   " nice color scheme
+Plug 'SirVer/ultisnips'                             " for snippets
 call plug#end()
 
 colorscheme PaperColorPatched
@@ -43,3 +44,14 @@ silent! call neomake#configure#automake('nrwi', 500)
 
 let g:neomake_tex_enabled_makers = []               " disable neomake for latex
 let g:neomake_java_enabled_makers = []              " disable neomake for java
+
+
+    " -------- configure UltiSnips ---------------------------------------------
+    " --------------------------------------------------------------------------
+let g:UltiSnipsExpandTrigger        = '<tab>'
+let g:UltiSnipsJumpForwardTrigger   = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger  = '<s-tab>'
+let g:UltiSnipsEditSplit            = 'context'
+let g:UltiSnipsSnippetsDir          = '~/.vim/UltiSnips'
+
+set runtimepath+=~/.current_course                  " course specific snippets
