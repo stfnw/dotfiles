@@ -56,6 +56,16 @@ if ! shopt -oq posix; then
     fi
 fi
 
+
+# auto-start ssh-agent: https://wiki.archlinux.org/index.php/SSH_keys#ssh-agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > "$XDG_RUNTIME_DIR/.ssh-agent-thing"
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    eval "$(< "$XDG_RUNTIME_DIR/.ssh-agent-thing")"
+fi
+
+
 # alias and function definitions
 [[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
 [[ -f ~/.bash_aliases_costly ]] && . ~/.bash_aliases_costly
