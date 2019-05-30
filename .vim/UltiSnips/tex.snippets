@@ -34,6 +34,11 @@ snippet dp "Basic pdflatex document"
 \usepackage{amsmath}
 \usepackage{amssymb}
 
+\usepackage{csquotes}
+
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{literatur.bib}
+
 \usepackage{lmodern}
 
 \usepackage{scrlayer-scrpage}
@@ -55,6 +60,11 @@ snippet dx "Basic xelatex document"
 \usepackage{xeCJK}
 
 \usepackage{amsmath}
+
+\usepackage{csquotes}
+
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{literatur.bib}
 
 
 \begin{document}
@@ -109,7 +119,8 @@ snippet db "Basic beamer presentation document"
 \documentclass[aspectratio=169]{beamer}
 
 \usepackage{pgfpages}
-\setbeameroption{second mode text on second screen=left}
+% \setbeameroption{second mode text on second screen=left}
+\setbeameroption{show notes on second screen=left}
 
 %\usetheme{Boadilla}
 \usetheme{Darmstadt}
@@ -124,6 +135,11 @@ snippet db "Basic beamer presentation document"
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 
+\usepackage{csquotes}
+
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{literatur.bib}
+
 \usepackage{lmodern}
 
 \usepackage{array}
@@ -135,19 +151,37 @@ snippet db "Basic beamer presentation document"
 \beamertemplatenavigationsymbolsempty
 \newcounter{slideinframe}
 \defbeamertemplate*{footline}{slide in frame number}{%
-	\hfill%
-	\usebeamercolor[fg]{page number in head/foot}%
-	\usebeamerfont{page number in head/foot}%
-	\ifnum\insertframeendpage>\insertframestartpage
-		\setcounter{slideinframe}{\numexpr\thepage-\insertframestartpage+1}
-		\insertframenumber{}\,-\,\theslideinframe
-	\else
-		\insertframenumber{}
-	\fi%
-	%\;/\;\inserttotalframenumber
-		\kern1em\vskip2pt%
+    \hfill%
+    \usebeamercolor[fg]{page number in head/foot}%
+    \usebeamerfont{page number in head/foot}%
+    \ifnum\insertframeendpage>\insertframestartpage
+        \setcounter{slideinframe}{\numexpr\thepage-\insertframestartpage+1}
+        \insertframenumber{}\,-\,\theslideinframe
+    \else
+        \insertframenumber{}
+    \fi%
+    %\;/\;\inserttotalframenumber
+        \kern1em\vskip2pt%
 }
 
+\title{$1}
+\author{$2}
+\institute{$3}
+\date{$4}
+
+\begin{document}
+
+\frame[typeset second]{\only<second:0>{\titlepage}}
+
+\begin{frame}{Motivation}
+$0
+\end{frame}
+
+\end{document}
+endsnippet
+
+snippet ds "standalone document for testing"
+\documentclass{standalone}
 
 \begin{document}
 $0
