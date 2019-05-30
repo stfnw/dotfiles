@@ -32,5 +32,9 @@ find -mindepth 1 \( -type f -o -type l \) ! -path './.git/*' ! -name install ! -
 # post-processing ##############################################################
 ################################################################################
 
-    # vim configuration ########################################################
+    # neovim configuration #####################################################
+mkdir -p ~/.config
+ln -sr ~/.vim ~/.config/nvim
+ln -sr ~/.vimrc ~/.config/nvim/init.vim
+# also: pip install neovim (for UltiSnips plugin)
 vim -cq                    # autoinstallation of plugins is configured in .vimrc
