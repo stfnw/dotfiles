@@ -31,6 +31,8 @@ set guioptions-=T                                   " remove toolbar
 set number                                          " enable line numbers
 set ruler                                           " show line / column number in status line
 
+set nomodeline                                      " disables modeline (security-risk)
+
 syntax on                                           " enable syntax highlighting
 if !exists('vimrc_config_with_plugins') | colorscheme desert | endif
 
