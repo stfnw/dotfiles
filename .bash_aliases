@@ -13,7 +13,7 @@ alias diff='diff --color'
 
 alias python='python3'                                  # default to python3
 
-alias en="export LANG=en_US.UTF-8 && export LC_ALL=C"   # quickly switch language to English
+alias c="export LANG=C && export LC_ALL=C"              # disable locale translations
 
 alias dtt="date --iso-8601=s | tr ':' '-'"              # date suitable for tar (without ':')
 
