@@ -9,7 +9,7 @@ TARGET := $(basename $(SRC))
 
 all: $(TARGET)
 
-%: %.c
+%.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 %: %.o
@@ -17,6 +17,38 @@ all: $(TARGET)
 
 clean:
 	rm -f $(TARGET)
+endsnippet
+
+snippet cn "Basic / naive c makefile for nested folder structure"
+TARGET = $(subst .c,,$(wildcard src/main/*.c))
+
+SOURCES=$(shell find . -name '*.c' | sort)
+OBJECTS=$(SOURCES:.c=.o)
+DEPENDENCIES=$(SOURCES:.c=.d)
+
+CFLAGS = -Os -g -std=gnu99 -Wall -Wextra
+CFLAGS += -MT $@ -MMD -MP -MF $(subst .o,.d,$@)
+
+.PHONY: all clean
+
+.SUFFIXES:
+
+all: $(TARGET)
+
+
+%.o: %.c %.d
+	 $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c -o $@ $<
+
+%.lst: %.o
+	$(OBJDUMP) -S $< > $@
+
+%.d: %.c ;
+
+.PRECIOUS: $(DEPENDENCIES)
+include $(wildcard $(DEPENDENCIES))
+
+clean:
+	rm -f -- $(TARGET) $(SOURCES:.c=.elf) $(SOURCES:.c=.hex) $(SOURCES:.c=.obj) $(SOURCES:.c=.o) $(SOURCES:.c=.d) $(SOURCES:.c=.eep) $(SOURCES:.c=.lst) $(SOURCES:.c=.lss) $(SOURCES:.c=.sym) $(SOURCES:.c=.map) $(SOURCES:.c=.eeprom) $(SOURCES:.c=.i) $(SOURCES:.c=.s)
 endsnippet
 
 
