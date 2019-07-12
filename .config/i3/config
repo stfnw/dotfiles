@@ -17,9 +17,9 @@ font pango:monospace 8
 
 # disable titlebar
 # set default_border none
-set default_border pixel 1
+set $default_border pixel 1
 # set border none
-set border pixel 1
+set $border pixel 1
 # for_window [class="^.*"] border none
 for_window [class="^.*"] border pixel 1
 
