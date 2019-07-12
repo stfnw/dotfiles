@@ -4,13 +4,20 @@ $ENV{'SOURCE_DATE_EPOCH'}='`date +%s`';
 # $ENV{'FORCE_SOURCE_DATE'}='1';		# also replace values of e.g. \today
 
 
-$pdf_mode = 1;
-
 # $preview_continuous_mode = 1;
 
+$pdf_mode = 1;
 # $pdflatex = 'xelatex --shell-escape -interaction=nonstopmode -file-line-error -synctex=1 %O %S';
 # $pdflatex = 'pdflatex --shell-escape -interaction=nonstopmode -file-line-error -synctex=1 %O %S';
 $pdflatex = 'pdflatex -interaction=nonstopmode -file-line-error -synctex=1 %O %S';
+
+# use dvipdf
+# $pdf_mode = 3;
+# latex = 'latex -interaction=nonstopmode -synctex=1 %O %S';
+
+# generate ps
+# $postscript_mode = 1;
+
 
 $use_make_for_missing_files = 1;
 endsnippet
