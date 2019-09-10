@@ -97,7 +97,7 @@ _startsession() {
   id=$(uuidgen)
   echo >> "$file"
   echo "# $(date --iso=s) - $id" >> "$file"
-  _edit_commit "$file" -c 'normal Gzzo- ' -c 'startinsert!'
+  _edit_commit "$file" -c 'normal Gzzo  - ' -c 'startinsert!'
   sed -i "s/${id}/$(date --iso=s)/g" "$file"
 }
 
