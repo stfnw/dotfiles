@@ -27,6 +27,7 @@ let tex_flavor      = 'latex'                       " use latex for tex files
 let tex_fold_enabled=1
 
 set guioptions-=T                                   " remove toolbar
+set guicursor=                                      " disable cursor styling (fixes weird symbols appearing)
 
 set number                                          " enable line numbers
 set ruler                                           " show line / column number in status line
@@ -39,6 +40,8 @@ if !exists('vimrc_config_with_plugins') | colorscheme desert | endif
 filetype on
 filetype plugin on
 filetype indent on
+
+set mouse=a                                         " enable mouse support
 
 
 " -------- Encoding Settings ---------------------------------------------------
