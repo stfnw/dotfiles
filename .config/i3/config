@@ -38,8 +38,9 @@ for_window [class="^.*"] border pixel 1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Mod1+Return exec konsole -e '/bin/sh'
+set $TERMINAL lxterminal
+bindsym $mod+Return exec $TERMINAL
+bindsym $mod+Mod1+Return exec $TERMINAL -e '/bin/bash --norc'
 # start the file manager
 bindsym $mod+Shift+Return exec dolphin
 
@@ -200,7 +201,7 @@ set $Locker ~/.local/bin/i3lock
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (p) shutdown, (u) switch user
 mode "$mode_system" {
         bindsym l exec --no-startup-id $Locker, mode "default"
-        bindsym e exec --no-startup-id i3-msg exit, mode "default"
+        bindsym e exec --no-startup-id loginctl terminate-session $XDG_SESSION_ID, mode "default"
         bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
         bindsym r exec --no-startup-id systemctl reboot, mode "default"
         bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"
