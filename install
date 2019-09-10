@@ -38,3 +38,6 @@ ln -sr ~/.vim ~/.config/nvim
 ln -sr ~/.vimrc ~/.config/nvim/init.vim
 # also: pip install neovim (for UltiSnips plugin)
 vim -cq                    # autoinstallation of plugins is configured in .vimrc
+
+    # ssh config ###############################################################
+mkdir -p ~/.ssh/sockets
