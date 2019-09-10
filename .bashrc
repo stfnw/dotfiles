@@ -26,9 +26,10 @@ export EDITOR=vim
 export SUDO_EDITOR=vim
 export VISUAL=vim
 export TERM=xterm-256color
+export GPG_TTY=$(tty)
 
-export HISTSIZE=2500
-export HISTFILESIZE=2500
+export HISTSIZE=10000
+export HISTFILESIZE=10000
 shopt -s histappend         # append to the history file, don't overwrite it
 shopt -s checkwinsize       # check window size/update LINES and COLUMNS after each command
 
