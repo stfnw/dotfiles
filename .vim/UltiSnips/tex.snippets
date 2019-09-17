@@ -5,17 +5,17 @@ global !p
 # provides "math()" context for snippets
 # a little bit less generalized but shorter than the original
 def math():
-	# `-1` is necessary, described in https://www.reddit.com/r/vim/comments/5bft0u/question_do_not_expand_iabbrev_in_comments/d9omlnc/
-	#	> The problem is that while you are in insert mode, col('.') returns the
-	# 	> column number of the "next" column, which may not exist. Thus, you have
-	# 	> to subtract one.
+    # `-1` is necessary, described in https://www.reddit.com/r/vim/comments/5bft0u/question_do_not_expand_iabbrev_in_comments/d9omlnc/
+    #    > The problem is that while you are in insert mode, col('.') returns the
+    #    > column number of the "next" column, which may not exist. Thus, you have
+    #    > to subtract one.
     groupname = vim.eval('synIDattr(synID(line("."), col(".")-1, 0), "name")')
     return groupname.startswith('texMath') and groupname != 'texMathText'
 
 
 def optional_whitespace(t, argpos):
-	word_delimiter = [',', '.', '?', '-', ' ', '(', '{', '[', ]
-	return ' ' if t[argpos] and t[argpos][0] not in word_delimiter else ''
+    word_delimiter = [',', '.', '?', '-', ' ', '(', '{', '[', ]
+    return ' ' if t[argpos] and t[argpos][0] not in word_delimiter else ''
 endglobal
 
 snippet today "Current date" w
@@ -91,7 +91,7 @@ snippet dl "Basic letter document"
 
 \setkomavar{fromname}{$1}
 \setkomavar{fromaddress}{%
-	$2
+    $2
 }
 \setkomavar{fromphone}{$3}
 
@@ -103,12 +103,12 @@ snippet dl "Basic letter document"
 \sffamily
 
 \begin{letter}{%
-	$4
+    $4
 }
 
 
 \setkomavar{subject}{%
-	$5
+    $5
 }
 
 \opening{$6}
@@ -119,6 +119,7 @@ snippet dl "Basic letter document"
 
 \end{document}
 endsnippet
+
 
 snippet db "Basic beamer presentation document"
 \documentclass[aspectratio=169]{beamer}
@@ -185,6 +186,7 @@ $0
 \end{document}
 endsnippet
 
+
 snippet ds "standalone document for testing"
 \documentclass{standalone}
 
@@ -202,32 +204,32 @@ endsnippet
 
 snippet f2 "frame typeset second"
 \begin{frame}[typeset second]
-	\only<second>{
-		$1
-	}
+    \only<second>{
+        $1
+    }
 
-	\only<second:0>{
-		\frametitle{$2}
-		$0
-	}
+    \only<second:0>{
+        \frametitle{$2}
+        $0
+    }
 \end{frame}
 endsnippet
 
 snippet ha "two minipages of half-pagewidth next to each other"
 \begin{minipage}[t]{0.45\textwidth}
-	$1
+    $1
 \end{minipage}\hfill\begin{minipage}[t]{0.45\textwidth}
-	$0
+    $0
 \end{minipage}
 endsnippet
 
 
 snippet fig "figure"
 \begin{figure}
-	\centering
-	\includegraphics[width=$1]{images/$2}
-	\caption{$3}
-	\label{fig:$4}
+    \centering
+    \includegraphics[width=$1]{images/$2}
+    \caption{$3}
+    \label{fig:$4}
 \end{figure}
 endsnippet
 
@@ -246,25 +248,25 @@ endsnippet
 
 snippet beg "begin{} / end{}" bA
 \begin{$1}
-	$0
+    $0
 \end{$1}
 endsnippet
 
 snippet it "itemize"
 \begin{itemize}
-	\item $0
+    \item $0
 \end{itemize}
 endsnippet
 
 snippet en "enumerate"
 \begin{enumerate}
-	\item $0
+    \item $0
 \end{enumerate}
 endsnippet
 
 snippet de "description"
 \begin{description}
-	\item$0
+    \item$0
 \end{description}
 endsnippet
 
@@ -274,7 +276,7 @@ endsnippet
 
 snippet dm "Display Math" w
 \[
-	$1
+    $1
 .\] $0
 endsnippet
 
@@ -312,10 +314,10 @@ snippet '^.*\)/' "Fraction (paranthesis)" wrA
 paren = 0
 i = len(match.string) - 1
 while True:
-	if match.string[i] == ')': paren += 1
-	if match.string[i] == '(': paren -= 1
-	if paren == 0: break
-	i -= 1
+    if match.string[i] == ')': paren += 1
+    if match.string[i] == '(': paren -= 1
+    if paren == 0: break
+    i -= 1
 snip.rv = match.string[0:i] + "\\frac{" + match.string[i+1:-1] + '}'
 `{$1}$0
 endsnippet
@@ -331,7 +333,7 @@ endsnippet
 
 snippet al "aligned" w
 $\begin{aligned}[t]
-	$0
+    $0
 \end{aligned}$
 endsnippet
 
