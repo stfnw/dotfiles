@@ -4,7 +4,7 @@
 
 file=$(mktemp)
 
-konsole -e vim "$file"
+i3-sensible-terminal -e vim "$file"
 head -c -1 "$file" | xdotool type --clearmodifiers --delay 0 --file -
 
 rm -- "$file"

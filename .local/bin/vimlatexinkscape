@@ -24,7 +24,7 @@ cat <<'EOF' >> "$tex"
 \begin{document}
 \end{document}
 EOF
-konsole -e vim +'/begin{document}' +'normal o' +startinsert "$tex"
+i3-sensible-terminal -e vim +'/begin{document}' +'normal o' +startinsert "$tex"
 latexmk -pdf -pdflatex='pdflatex -interaction=nonstopmode -synctex=1 %O %S' "$tex"
 pdf2svg "$pdf" "$svg"
 
