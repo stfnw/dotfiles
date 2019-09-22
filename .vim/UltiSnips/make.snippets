@@ -2,21 +2,21 @@ snippet c "Basic c makefile"
 CFLAGS = -g -Wall -Werror -std=c99
 
 .PHONY: all clean
-.SUFFIXES: # disable built-in rules
 
 SRC    := $(wildcard *.c)
 TARGET := $(basename $(SRC))
 
 all: $(TARGET)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
-
-%: %.o
-	$(CC) -o $@ $<
-
 clean:
 	rm -f $(TARGET)
+
+# .SUFFIXES: # disable built-in rules
+# %.o: %.c
+# 	$(CC) $< -c $(CPPFLAGS) $(CFLAGS) -o $@
+# 
+# %: %.o
+# 	$(CC) $(LDFLAGS) $< $(LOADLIBES) $(LDLIBS) -o $@
 endsnippet
 
 snippet cn "Basic / naive c makefile for nested folder structure"
