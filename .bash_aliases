@@ -109,3 +109,6 @@ _startsession() {
 # sudo iptables -A OUTPUT -m owner --gid-owner nointernet -j DROP
 # sudo ip6tables -A OUTPUT -m owner --gid-owner nointernet -j DROP
 alias ni='sg nointernet'
+
+# tar command for generating reproducible backups of some important configuration files
+alias conf.bak='LC_ALL=C tar --verbose --create --file - --sort=name --files-from ~/.config/backup_config.txt --ignore-failed-read | gzip --no-name > "$(date -I)_backup_config_files-$(hostname).tar.gz"'
