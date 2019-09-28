@@ -112,3 +112,22 @@ alias ni='sg nointernet'
 
 # tar command for generating reproducible backups of some important configuration files
 alias conf.bak='LC_ALL=C tar --verbose --create --file - --sort=name --files-from ~/.config/backup_config.txt --ignore-failed-read | gzip --no-name > "$(date -I)_backup_config_files-$(hostname).tar.gz"'
+
+# diff two tar files by extracting them into temporary directories
+# usage e.g.:
+#       tardiff 1.tar.gz 2.tar.gz
+#       tardiff 1.tar.gz 2.tar.gz 'diff -Naur'
+tardiff() {
+    FILE1="$1"
+    FILE2="$2"
+    DIFFCMD="${3:-meld}"
+
+    DIR1=$(mktemp -d)
+    DIR2=$(mktemp -d)
+
+    tar -xf "$FILE1" -C "$DIR1"
+    tar -xf "$FILE2" -C "$DIR2"
+
+    $DIFFCMD "$DIR1" "$DIR2"
+    env rm -rf -- "$DIR1" "$DIR2"
+}
