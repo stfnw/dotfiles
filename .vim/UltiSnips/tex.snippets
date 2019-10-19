@@ -14,7 +14,7 @@ def math():
 
 
 def optional_whitespace(t, argpos):
-    word_delimiter = [',', '.', '?', '-', ' ', '(', '{', '[', ]
+    word_delimiter = [',','.','?','!','-','_',' ','(','{','[','^']
     return ' ' if t[argpos] and t[argpos][0] not in word_delimiter else ''
 endglobal
 
@@ -245,6 +245,31 @@ snippet title "create very basic title page"
 \pagebreak
 endsnippet
 
+snippet se "section" bA
+\section{$1}
+
+$0
+endsnippet
+snippet su "subsection" bA
+\subsection{$1}
+
+$0
+endsnippet
+snippet ssu "subsubsection" bA
+\subsubsection{$1}
+
+$0
+endsnippet
+snippet pg "paragraph" bA
+\paragraph{$1}
+$0
+endsnippet
+
+snippet mc "multicolumn" bA
+\begin{multicols}{$1}
+$0
+\end{multicols}
+endsnippet
 
 snippet beg "begin{} / end{}" bA
 \begin{$1}
@@ -274,10 +299,10 @@ snippet im "Inline Math" w
 $$1$`!p snip.rv = optional_whitespace(t,2)`$2
 endsnippet
 
-snippet dm "Display Math" w
+snippet dm "Display Math" bA
 \[
-    $1
-.\] $0
+    $0
+\]
 endsnippet
 
 
@@ -331,18 +356,50 @@ snippet ex "exists" wA
 \exists \, $1. \; $0
 endsnippet
 
-snippet al "aligned" w
-$\begin{aligned}[t]
-    $0
-\end{aligned}$
+context "math()"
+snippet t "times" w
+\times 
 endsnippet
 
 context "math()"
-snippet ( "balance round brackets / parentheses" iA
+snippet mb "math blackboard font" w
+\mathbb{$1}`!p snip.rv = optional_whitespace(t,0)`$0
+endsnippet
+
+context "math()"
+snippet mc "math calligraphic font" w
+\mathcal{$1}`!p snip.rv = optional_whitespace(t,0)`$0
+endsnippet
+
+snippet al "aligned" w
+\[
+	\begin{aligned}[t]
+		$0
+	\end{aligned}
+\]
+endsnippet
+
+context "math()"
+snippet cd "cdot" wA
+\cdot 
+endsnippet
+
+context "math()"
+snippet es "emptyset" wA
+\emptyset 
+endsnippet
+
+context "math()"
+snippet os "overset" wA
+\overset{$1}{$2} $0
+endsnippet
+
+context "math()"
+snippet \( "balance round brackets / parentheses" iA
 \left( $1 \right) $0
 endsnippet
 context "math()"
-snippet [ "balance square brackets / brackets" iA
+snippet \[ "balance square brackets / brackets" iA
 \left[ $1 \right] $0
 endsnippet
 # doesn't work, don't know why
