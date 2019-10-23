@@ -1,0 +1,13 @@
+#!/bin/bash
+set -eu -o pipefail
+
+################################################################################
+# simple wrapper around libreoffice --convert-to txt to output text to stdout  #
+################################################################################
+
+WORKDIR="$(mktemp --directory)"
+soffice --convert-to txt --outdir "$WORKDIR" "$1"
+cat "$WORKDIR"/*
+rm -rf -- "$WORKDIR"
+
+exit 0

@@ -1,0 +1,14 @@
+*.doc   binary diff=office
+*.docx  binary diff=office
+*.odt   binary diff=office
+*.fodt  binary diff=office
+
+*.ppt   binary diff=office
+*.pptx  binary diff=office
+*.odp   binary diff=office
+*.fodp  binary diff=office
+
+*.xls   binary diff=office
+*.xlsx  binary diff=office
+*.ods   binary diff=office
+*.fods  binary diff=office

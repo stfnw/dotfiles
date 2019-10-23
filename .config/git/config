@@ -80,3 +80,8 @@
 # git difftool -t officet HEAD~5:./doc.fodt ./doc.fodt
 [difftool "officet"]
     cmd = "~/.local/bin/officedifftool \"$LOCAL\" \"$REMOTE\""
+
+
+# https://medium.com/@mbrehin/git-advanced-diff-odt-pdf-doc-xls-ppt-25afbf4f1105
+[diff "office"]
+    textconv = "~/.local/bin/office2txt"
