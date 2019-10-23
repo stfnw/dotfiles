@@ -1,0 +1,21 @@
+#!/bin/bash
+set -eu -o pipefail
+
+################################################################################
+# diffs two office documents documents by                                      #
+#   - converting them to PDF (with LibreOffice)                                #
+#   - diffing the resulting files (with diffpdf)                               #
+################################################################################
+
+WORKDIR="$(mktemp --directory)"
+LOCAL="$1"
+REMOTE="$2"
+
+soffice --convert-to pdf --outdir "$WORKDIR" "$LOCAL"
+soffice --convert-to pdf --outdir "$WORKDIR" "$REMOTE"
+
+diffpdf "$WORKDIR"/*
+
+rm -rf -- "$WORKDIR"
+
+exit 0

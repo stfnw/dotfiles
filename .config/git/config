@@ -74,3 +74,9 @@
 
 [color]
     ui = true
+
+
+# https://stackoverflow.com/questions/12356917/how-to-set-difftool-mergetool-for-a-specific-file-extension-in-git ; usage e.g. with
+# git difftool -t officet HEAD~5:./doc.fodt ./doc.fodt
+[difftool "officet"]
+    cmd = "~/.local/bin/officedifftool \"$LOCAL\" \"$REMOTE\""
