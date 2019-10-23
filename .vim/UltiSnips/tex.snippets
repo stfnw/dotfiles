@@ -216,9 +216,9 @@ snippet f2 "frame typeset second"
 endsnippet
 
 snippet ha "two minipages of half-pagewidth next to each other"
-\begin{minipage}[t]{0.45\textwidth}
+\begin{minipage}{0.45\textwidth}
     $1
-\end{minipage}\hfill\begin{minipage}[t]{0.45\textwidth}
+\end{minipage}\hfill\begin{minipage}{0.45\textwidth}
     $0
 \end{minipage}
 endsnippet
@@ -349,25 +349,25 @@ endsnippet
 
 context "math()"
 snippet fa "forall" wA
-\forall \, $1. \; $0
+\forall \, $1: \; $0
 endsnippet
 context "math()"
 snippet ex "exists" wA
-\exists \, $1. \; $0
+\exists \, $1: \; $0
 endsnippet
 
 context "math()"
-snippet t "times" w
+snippet ti "times" w
 \times 
 endsnippet
 
 context "math()"
-snippet mb "math blackboard font" w
+snippet fb "math blackboard font" w
 \mathbb{$1}`!p snip.rv = optional_whitespace(t,0)`$0
 endsnippet
 
 context "math()"
-snippet mc "math calligraphic font" w
+snippet fc "math calligraphic font" w
 \mathcal{$1}`!p snip.rv = optional_whitespace(t,0)`$0
 endsnippet
 
@@ -392,6 +392,11 @@ endsnippet
 context "math()"
 snippet os "overset" wA
 \overset{$1}{$2} $0
+endsnippet
+
+context "math()"
+snippet te "text" w
+\text{$1} $0
 endsnippet
 
 context "math()"
