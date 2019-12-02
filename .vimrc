@@ -44,6 +44,21 @@ filetype indent on
 set mouse=a                                         " enable mouse support
 
 
+" -------- netrw settings ------------------------------------------------------
+" ------------------------------------------------------------------------------
+" see e.g. https://shapeshed.com/vim-netrw/
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 20
+" automatically open file tree view if called without a file
+augroup ProjectDrawer
+  autocmd!
+  autocmd VimEnter * if @% == "" | :Vexplore
+augroup end
+
+
 " -------- Encoding Settings ---------------------------------------------------
 " ------------------------------------------------------------------------------
 scriptencoding=utf-8
@@ -64,9 +79,8 @@ nnoremap <leader>lc :lclose<CR>
 " toggle spell checking
 nnoremap <silent> <leader>s :set spell!<CR>
 
-" easier navigation between tabs
-nnoremap tj :tabnext<CR>
-nnoremap tk :tabprev<CR>
+" easier navigation between buffers
+nnoremap <Leader>b :ls<CR>:b<Space>
 
 
 " -------- Spell Checking ------------------------------------------------------

@@ -211,6 +211,7 @@ bindsym $mod+i exec --no-startup-id ~/.local/bin/viminput
 # vim/latex/inkscape integration: paste latex math (moderately) fast into inkscape
 bindsym $mod+n exec --no-startup-id ~/.local/bin/vimlatexinkscape
 
+for_window [class="X3270xad"] floating enable
 
 ################################################################################
 # execs

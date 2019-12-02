@@ -8,7 +8,7 @@
 *.odp   binary diff=office
 *.fodp  binary diff=office
 
-*.xls   binary diff=office
-*.xlsx  binary diff=office
+# *.xls   binary diff=office
+# *.xlsx  binary diff=office
 *.ods   binary diff=office
 *.fods  binary diff=office

@@ -9,13 +9,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'vim-scripts/jcl.vim', { 'do' : 'dos2unix ./plugin/jcl.vim' }
 Plug 'dhruvasagar/vim-table-mode'                   " for pretty ascii tables
 Plug 'tpope/vim-fugitive'                           " for all things git
-Plug 'neomake/neomake'                              " e.g. for shellcheck / other linters
+" Plug 'neomake/neomake'                              " e.g. for shellcheck / other linters
 Plug 'lervag/vimtex'                                " for latex editing
 Plug 'NLKNguyen/papercolor-theme'                   " nice color scheme
 Plug 'SirVer/ultisnips'                             " for snippets
+Plug 'vim-scripts/jcl.vim', { 'do' : 'dos2unix ./plugin/jcl.vim' }
 call plug#end()
 
 colorscheme PaperColorPatched

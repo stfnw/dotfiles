@@ -7,7 +7,7 @@
     i   = init
     a   = add
     au  = add --update
-    s   = status --short
+    s   = status --short --branch
     c   = commit
     ca  = commit --amend
     cm  = commit -m
@@ -25,7 +25,7 @@
     r   = remote
     ls  = ls-tree -r --name-only
     # updates all repositories in the current folder
-    u   = !"find . -mindepth 1 -maxdepth 1 -type d -exec git --git-dir='{}/.git' --work-tree='{}/' pull --all \\;"
+    # u   = !"find . -mindepth 1 -maxdepth 1 -type d -exec git --git-dir='{}/.git' --work-tree='{}/' pull --all \\;"
 
     # search in commit messages
     fcm = log --all -i --grep
@@ -52,9 +52,9 @@
     lgs = !"git lg1 --stat"
     # or: lgs = !"git lg1 --summary"
 
-    lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
-    lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
-    lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+    lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --show-signature
+    lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --show-signature
+    lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)' --show-signature
 
     # also nice: git log --all --graph --abbrev-commit --decorate --pretty=oneline
 
@@ -81,7 +81,12 @@
 [difftool "officet"]
     cmd = "~/.local/bin/officedifftool \"$LOCAL\" \"$REMOTE\""
 
+[difftool "pdf"]
+    cmd = "diffpdf \"$LOCAL\" \"$REMOTE\""
 
 # https://medium.com/@mbrehin/git-advanced-diff-odt-pdf-doc-xls-ppt-25afbf4f1105
 [diff "office"]
     textconv = "~/.local/bin/office2txt"
+
+[rerere]
+	enabled = true

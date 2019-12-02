@@ -1,22 +1,25 @@
-# ideas and also specific snippets are initially/mainly taken (i.e. copied verbatim) from the excellent
-# https://castel.dev/post/lecture-notes-1/ (https://castel.dev/tex-e0c2e8b64036f77db00411d562750c12.snippets)
-
 global !p
-# provides "math()" context for snippets
-# a little bit less generalized but shorter than the original
+# ideas and also specific snippets are initially/partly taken from
+# https://castel.dev/post/lecture-notes-1/ (https://github.com/gillescastel/latex-snippets) licensed under MIT Copyright (c) 2019 Gilles Castel
+
 def math():
-    # `-1` is necessary, described in https://www.reddit.com/r/vim/comments/5bft0u/question_do_not_expand_iabbrev_in_comments/d9omlnc/
-    #    > The problem is that while you are in insert mode, col('.') returns the
-    #    > column number of the "next" column, which may not exist. Thus, you have
-    #    > to subtract one.
-    groupname = vim.eval('synIDattr(synID(line("."), col(".")-1, 0), "name")')
-    return groupname.startswith('texMath') and groupname != 'texMathText'
+    synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+    synstack = [ vim.eval("synIDattr({}, 'name')".format(i)) for i in synstackids ]
+
+    for syn in reversed(synstack):
+        if syn == 'texMathText':
+            return False
+        if syn.startswith('texMath'):
+            return True
+
+    return False
 
 
 def optional_whitespace(t, argpos):
     word_delimiter = [',','.','?','!','-','_',' ','(','{','[','^']
     return ' ' if t[argpos] and t[argpos][0] not in word_delimiter else ''
 endglobal
+
 
 snippet today "Current date" w
 `date +%F`
@@ -233,8 +236,17 @@ snippet fig "figure"
 \end{figure}
 endsnippet
 
+snippet tab "table"
+\begin{center}
+	\begin{tabular}{$1}
+		$0
+	\end{tabular}
+\end{center}
+endsnippet
 
-snippet title "create very basic title page" 
+
+
+snippet title "create very basic title page"
 \thispagestyle{empty}
 \title{$1}
 \date{$2}
@@ -265,7 +277,7 @@ snippet pg "paragraph" bA
 $0
 endsnippet
 
-snippet mc "multicolumn" bA
+snippet mc "multicolumn" b
 \begin{multicols}{$1}
 $0
 \end{multicols}
@@ -349,11 +361,11 @@ endsnippet
 
 context "math()"
 snippet fa "forall" wA
-\forall \, $1: \; $0
+\forall $1. $0
 endsnippet
 context "math()"
 snippet ex "exists" wA
-\exists \, $1: \; $0
+\exists $1. $0
 endsnippet
 
 context "math()"
@@ -380,11 +392,6 @@ snippet al "aligned" w
 endsnippet
 
 context "math()"
-snippet cd "cdot" wA
-\cdot 
-endsnippet
-
-context "math()"
 snippet es "emptyset" wA
 \emptyset 
 endsnippet
@@ -395,9 +402,25 @@ snippet os "overset" wA
 endsnippet
 
 context "math()"
+snippet ub "underbrace" wA
+\underbrace{$1}_{$2} $0
+endsnippet
+
+context "math()"
 snippet te "text" w
 \text{$1} $0
 endsnippet
+
+
+context "math()"
+snippet => "implies" iA
+\implies $0
+endsnippet
+context "math()"
+snippet <= "impliedby" iA
+\impliedby $0
+endsnippet
+
 
 context "math()"
 snippet \( "balance round brackets / parentheses" iA
@@ -407,11 +430,37 @@ context "math()"
 snippet \[ "balance square brackets / brackets" iA
 \left[ $1 \right] $0
 endsnippet
-# doesn't work, don't know why
-# context "math()"
-# snippet { "balance curly brackets / braces" iA
-# \left\\{ $1 \right\\} $0
-# endsnippet
+context "math()"
+snippet s{ "balance curly brackets / braces" iA
+\\{ $1 \\} $0
+endsnippet
+context "math()"
+snippet \{ "balance curly brackets / braces" iA
+\left\\{ $1 \right\\} $0
+endsnippet
+context "math()"
+snippet \| "balance |" iA
+\left| $1 \right| $0
+endsnippet
+
+
+context "math()"
+snippet b( "balance round brackets / parentheses" iA
+\Big( $1 \Big) $0
+endsnippet
+context "math()"
+snippet b[ "balance square brackets / brackets" iA
+\Big[ $1 \Big] $0
+endsnippet
+context "math()"
+snippet b{ "balance curly brackets / braces" iA
+\Big\\{ $1 \Big\\} $0
+endsnippet
+context "math()"
+snippet b| "balance |" iA
+\Big| $1 \Big| $0
+endsnippet
+
 
 snippet ( "balance round brackets / parentheses" iA
 ($1)`!p snip.rv = optional_whitespace(t,2)`$2
@@ -421,5 +470,8 @@ snippet [ "balance square brackets / brackets" iA
 endsnippet
 snippet { "balance curly brackets / braces" iA
 {$1}`!p snip.rv = optional_whitespace(t,2)`$2
+endsnippet
+snippet b| "balance |" iA
+|$1|`!p snip.rv = optional_whitespace(t,2)`$2
 endsnippet
 ################################################################################

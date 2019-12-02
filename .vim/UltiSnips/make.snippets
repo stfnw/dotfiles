@@ -75,8 +75,16 @@ clean:
 %.pdf %.pdf_tex: %.svg
 	inkscape $< --without-gui --export-area-drawing --export-pdf $(<:.svg=.pdf) --export-latex
 
+%.svg: %.pdf
+	# inkscape --without-gui --file=$< --export-plain-svg=$@
+	inkscape --without-gui --file=$< --export-plain-svg=$@ --export-text-to-path
+
 %.svg: %.dia
 	dia $< --export $@
+
+
+%.pdf: %.dot
+	dot -Tpdf $< > $@
 
 # use in latex document e.g. with
 #	% allows for include of images by relative path to the `images/` sub-directory
