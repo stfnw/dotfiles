@@ -42,6 +42,8 @@
     lggc            = !"width=$(stty size | cut -d' ' -f2) ; git internal-lgg | column -c $width | less --no-init --quit-if-one-screen"
 
 
+    lol = log --all --graph --decorate --oneline
+
     # from http://stackoverflow.com/questions/1838873/visualizing-branch-topology-in-git/34467298#34467298
     lg  = !"git lg1"
     lg1 = !"git lg1-specific --all"
@@ -55,8 +57,6 @@
     lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --show-signature
     lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --show-signature
     lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)' --show-signature
-
-    # also nice: git log --all --graph --abbrev-commit --decorate --pretty=oneline
 
 
     # automatically fetch .gitignore from https://github.com/joeblau/gitignore.io

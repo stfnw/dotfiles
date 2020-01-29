@@ -21,7 +21,7 @@ order += "cpu_usage"
 order += "cpu_temperature 0"
 order += "tztime local"
 
-wireless ipv6 {
+ipv6 {
         format_up = "IPv6"
         format_down = "no IPv6"
 }

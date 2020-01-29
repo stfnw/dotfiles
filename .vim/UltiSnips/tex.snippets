@@ -383,12 +383,10 @@ snippet fc "math calligraphic font" w
 \mathcal{$1}`!p snip.rv = optional_whitespace(t,0)`$0
 endsnippet
 
-snippet al "aligned" w
-\[
-	\begin{aligned}[t]
-		$0
-	\end{aligned}
-\]
+snippet al "align" w
+\begin{align*}
+	$0
+\end{align*}
 endsnippet
 
 context "math()"
@@ -462,6 +460,19 @@ snippet b| "balance |" iA
 endsnippet
 
 
+context "math()"
+snippet < "balance <" i
+\langle $1 \rangle $0
+endsnippet
+context "math()"
+snippet \< "balance <" iA
+\left\langle $1 \right\rangle $0
+endsnippet
+context "math()"
+snippet b< "balance <" iA
+\Big\langle $1 \Big\rangle $0
+endsnippet
+
 snippet ( "balance round brackets / parentheses" iA
 ($1)`!p snip.rv = optional_whitespace(t,2)`$2
 endsnippet
@@ -473,5 +484,11 @@ snippet { "balance curly brackets / braces" iA
 endsnippet
 snippet b| "balance |" iA
 |$1|`!p snip.rv = optional_whitespace(t,2)`$2
+endsnippet
+
+
+context "math()"
+snippet pm "matrix" w
+\begin{pmatrix}$1\end{pmatrix} $0
 endsnippet
 ################################################################################

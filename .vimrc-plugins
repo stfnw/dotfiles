@@ -54,4 +54,11 @@ let g:UltiSnipsJumpBackwardTrigger  = '<s-tab>'
 let g:UltiSnipsEditSplit            = 'context'
 let g:UltiSnipsSnippetsDir          = '~/.vim/UltiSnips'
 
+    " -------- configure syntax highlighting for other tex packages ------------
+    " --------------------------------------------------------------------------
+if empty(glob('~/.config/nvim/after/syntax/tex/amsmath.vim'))
+    silent !f=$(mktemp); curl -sfL http://www.drchip.org/astronaut/vim/vbafiles/amsmath.vba.gz | zcat > $f ;
+                \ vim -u NONE -c 'packadd vimball' -c 'source \%' -c q $f
+endif
+
 set runtimepath+=~/.current_course                  " course specific snippets
